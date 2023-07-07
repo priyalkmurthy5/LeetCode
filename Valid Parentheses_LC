@@ -1,0 +1,32 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        close_dictionary = {
+            ")" : "(",
+            "]" : "[",
+            "}" : "{"
+        }
+        final_bool = True
+        pop_counter = 0
+        stack_paran = []
+        open_paran = {"(", "{", "["}
+        close_paran = {")", "}", "]"}
+
+        for i in s:
+            if i in open_paran:
+                stack_paran.append(i)
+            elif i in close_paran:
+                checker = close_dictionary[i]
+                if len(stack_paran) != 0 and checker == stack_paran[-1]:
+                    last_element = stack_paran.pop()
+                    pop_counter = pop_counter + 1
+                else:
+                    final_bool = False
+                    break 
+        
+        if(pop_counter != 0):
+            if len(stack_paran) != 0:
+                return False
+            else:
+                return final_bool
+        else: 
+            return False
