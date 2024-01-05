@@ -1,0 +1,22 @@
+def wordPattern(self, pattern, s):
+        """
+        :type pattern: str
+        :type s: str
+        :rtype: bool
+        """
+        patternMatcher = {}
+        patternMatcher2 = {}
+        s_list = list(s.split(" "))
+        if len(s_list) != len(pattern):
+            return False
+
+        for i in range(0, len(pattern)):
+            if pattern[i] not in patternMatcher and s_list[i] not in patternMatcher2:
+                patternMatcher[pattern[i]] = s_list[i]
+                patternMatcher2[s_list[i]] = pattern[i]
+            elif pattern[i] in patternMatcher and patternMatcher[pattern[i]] != s_list[i] :
+                return False
+            elif s_list[i] in patternMatcher2 and patternMatcher2[s_list[i]] != pattern[i]:
+                return False
+            
+        return True
